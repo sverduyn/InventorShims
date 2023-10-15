@@ -417,7 +417,7 @@ namespace InventorShims
         public static bool IsEditInPlaceActive(this Document document)
         {
             var test = document.ActivatedObject;
-            return (test is not null);
+            return (test != null);
         }
 
         /// <summary>

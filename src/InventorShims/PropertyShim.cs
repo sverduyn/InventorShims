@@ -85,7 +85,8 @@ namespace InventorShims
             "Inventor Summary Information",
             "Inventor Document Summary Information",
             "Design Tracking Properties",
-            "Inventor User Defined Properties"
+            "Inventor User Defined Properties",
+            "Content Library Component Properties"
         };
 
         #endregion PropertyLookup

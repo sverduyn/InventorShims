@@ -15,9 +15,17 @@
 	  <PackageReleaseNotes>
 		  Changelog at https:=//github.com/InventorCode/InventorShims/blob/feat/fluentdocs/CHANGELOG.md
 	  </PackageReleaseNotes>
+	  <SignAssembly>True</SignAssembly>
+	  <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\artifacts\Release\net47\InventorShims.xml</DocumentationFile>
+    <OutputPath>..\..\artifacts\Release</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>..\..\artifacts\Release\net47\InventorShims.xml</DocumentationFile>
     <OutputPath>..\..\artifacts\Release</OutputPath>
@@ -28,6 +36,23 @@
     <DocumentationFile>..\..\artifacts\Debug\net47\InventorShims.xml</DocumentationFile>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath>..\..\artifacts\Debug</OutputPath>
+    <DocumentationFile>..\..\artifacts\Debug\net47\InventorShims.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="Inventor">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>d98a091d-3a0f-4c3e-b36e-61f62068d488</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="..\..\images\InventorCode-brackets-logo-64x64.png">
       <Pack>True</Pack>
@@ -36,9 +61,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Autodesk.Inventor.Interop">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\Autodesk\Inventor 2021\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
