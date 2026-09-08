@@ -211,10 +211,10 @@ namespace InventorShims
         /// <returns>List(of Documents)</returns>
         public static List<Document> GetDocumentsFromSelectSet(this SelectSet selectSet)
         {
-            Debug.Listeners.Add(new TextWriterTraceListener(Console.Out));
-            Debug.AutoFlush = true;
-            Debug.Indent();
-            Debug.WriteLine("Entering GetDocumentsFromSelectSet method...");
+            Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
+            Trace.AutoFlush = true;
+            Trace.Indent();
+            Trace.WriteLine("Entering GetDocumentsFromSelectSet method...");
 
             List<Document> documentList = new List<Document>();
 
@@ -230,15 +230,15 @@ namespace InventorShims
             {
                 tempDocument = GetDocumentFromObject(i);
 
-                Debug.WriteLine("item  " + (string)i.type.ToString());
+                Trace.WriteLine("item  " + (string)i.type.ToString());
 
                 if (tempDocument is null)
                 {
-                    Debug.WriteLine("this object is not a document");
+                    Trace.WriteLine("this object is not a document");
                     continue;
                 }
 
-                Debug.WriteLine("this object is a document.");
+                Trace.WriteLine("this object is a document.");
                 documentList.Add(tempDocument);
             }
 

@@ -1,4 +1,4 @@
-# InventorShims
+﻿# InventorShims
 
 ## About
 
@@ -13,6 +13,8 @@ This is an unofficial collection of extension APIs for Autodesk Inventor.  The g
   * better error handling outcomes.  E.g. an example is an iproperty access method that will not throw an exception when a non-present property is accessed.
 
 The minimum supported version of Inventor will be 2020.
+
+The core library is multi-targeted for `net48` and `net10.0-windows`.
 
 ## Documentation
 

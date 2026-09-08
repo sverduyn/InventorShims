@@ -23,7 +23,7 @@ namespace InventorShims
 
             try
             {
-                return (Inventor.Application) Marshal.GetActiveObject("Inventor.Application");
+                return GetActiveInventorApplication();
             }
             catch
             {
@@ -61,7 +61,7 @@ namespace InventorShims
         {
             try
             {
-                return (Inventor.Application)Marshal.GetActiveObject("Inventor.Application");
+                return GetActiveInventorApplication();
             }
             catch (Exception e)
             {
@@ -94,6 +94,23 @@ namespace InventorShims
                     throw new SystemException("Unable to start Inventor.  Error message: " + e2.Message, e2);
                 }
         }
+
+        private static Inventor.Application GetActiveInventorApplication()
+        {
+#if NETFRAMEWORK
+            return (Inventor.Application)Marshal.GetActiveObject("Inventor.Application");
+#else
+            Type appType = Type.GetTypeFromProgID("Inventor.Application", throwOnError: true);
+            Guid clsid = appType.GUID;
+            GetActiveObject(ref clsid, IntPtr.Zero, out object activeObject);
+            return (Inventor.Application)activeObject;
+#endif
+        }
+
+#if !NETFRAMEWORK
+        [DllImport("oleaut32.dll", PreserveSig = false)]
+        private static extern void GetActiveObject(ref Guid rclsid, IntPtr reserved, [MarshalAs(UnmanagedType.IUnknown)] out object ppunk);
+#endif
     }
 }
 
