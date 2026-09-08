@@ -1,82 +1,82 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	<TargetFrameworks>net48;net10.0-windows</TargetFrameworks>
-	<RestoreTargetFrameworks>net48;net10.0-windows</RestoreTargetFrameworks>
-	<!-- Prevent VS inner-build TargetFramework global property from overriding the multi-TFM restore list -->
-	<_DisableNuGetRestoreTargetFrameworksOverride>true</_DisableNuGetRestoreTargetFrameworksOverride>
-	<UseWindowsForms>true</UseWindowsForms>
-	<Authors>InventorCode</Authors>
-	<Version>1.2.1</Version>
-	<PackageProjectUrl>https://github.com/InventorCode/InventorShims</PackageProjectUrl>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<PackageIcon>InventorCode-brackets-logo-64x64.png</PackageIcon>
-	<PackageIconUrl />
-	<RepositoryUrl>https://github.com/InventorCode/InventorShims</RepositoryUrl>
-	<PackageTags>Autodesk Inventor API</PackageTags>
-	<Description>A collection of extension APIs for Autodesk Inventor.</Description>
-	<Copyright>Copyright 2021</Copyright>
-	<PackageReleaseNotes>
-	  Changelog at https:=//github.com/InventorCode/InventorShims/blob/feat/fluentdocs/CHANGELOG.md
-	</PackageReleaseNotes>
-	<SignAssembly>True</SignAssembly>
-	<Platforms>AnyCPU;x64</Platforms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net48;net10.0-windows</TargetFrameworks>
+		<RestoreTargetFrameworks>net48;net10.0-windows</RestoreTargetFrameworks>
+		<!-- Prevent VS inner-build TargetFramework global property from overriding the multi-TFM restore list -->
+		<_DisableNuGetRestoreTargetFrameworksOverride>true</_DisableNuGetRestoreTargetFrameworksOverride>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Authors>InventorCode</Authors>
+		<Version>1.2.1</Version>
+		<PackageProjectUrl>https://github.com/InventorCode/InventorShims</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>InventorCode-brackets-logo-64x64.png</PackageIcon>
+		<PackageIconUrl />
+		<RepositoryUrl>https://github.com/InventorCode/InventorShims</RepositoryUrl>
+		<PackageTags>Autodesk Inventor API</PackageTags>
+		<Description>A collection of extension APIs for Autodesk Inventor.</Description>
+		<Copyright>Copyright 2021</Copyright>
+		<PackageReleaseNotes>
+			Changelog at https:=//github.com/InventorCode/InventorShims/blob/feat/fluentdocs/CHANGELOG.md
+		</PackageReleaseNotes>
+		<SignAssembly>True</SignAssembly>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	<DefineConstants>TRACE</DefineConstants>
-	<DocumentationFile>..\..\artifacts\Release\$(TargetFramework)\InventorShims.xml</DocumentationFile>
-	<OutputPath>..\..\artifacts\Release</OutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile>..\..\artifacts\Release\$(TargetFramework)\InventorShims.xml</DocumentationFile>
+		<OutputPath>..\..\artifacts\Release</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-	<DefineConstants>TRACE</DefineConstants>
-	<DocumentationFile>..\..\artifacts\Release\$(TargetFramework)\InventorShims.xml</DocumentationFile>
-	<OutputPath>..\..\artifacts\Release</OutputPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile>..\..\artifacts\Release\$(TargetFramework)\InventorShims.xml</DocumentationFile>
+		<OutputPath>..\..\artifacts\Release</OutputPath>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	<OutputPath>..\..\artifacts\Debug</OutputPath>
-	<DocumentationFile>..\..\artifacts\Debug\$(TargetFramework)\InventorShims.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>..\..\artifacts\Debug</OutputPath>
+		<DocumentationFile>..\..\artifacts\Debug\$(TargetFramework)\InventorShims.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-	<OutputPath>..\..\artifacts\Debug</OutputPath>
-	<DocumentationFile>..\..\artifacts\Debug\$(TargetFramework)\InventorShims.xml</DocumentationFile>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<OutputPath>..\..\artifacts\Debug</OutputPath>
+		<DocumentationFile>..\..\artifacts\Debug\$(TargetFramework)\InventorShims.xml</DocumentationFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(InventorInteropPath)' == ''">
-	<InventorInteropPath Condition="Exists('$(ProgramW6432)\Autodesk\Inventor 2027\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2027\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2025\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2025\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2024\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2024\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2023\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2023\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2022\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2022\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2021\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2021\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-	<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2020\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2020\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(InventorInteropPath)' == ''">
+		<InventorInteropPath Condition="Exists('$(ProgramW6432)\Autodesk\Inventor 2027\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2027\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2026\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2025\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2025\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2024\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2024\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2023\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2023\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2022\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2022\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2021\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2021\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+		<InventorInteropPath Condition="'$(InventorInteropPath)' == '' and Exists('$(ProgramW6432)\Autodesk\Inventor 2020\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll')">$(ProgramW6432)\Autodesk\Inventor 2020\Bin\Public Assemblies\Autodesk.Inventor.Interop.dll</InventorInteropPath>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<Reference Include="Autodesk.Inventor.Interop">
-	  <HintPath>$(InventorInteropPath)</HintPath>
-	  <EmbedInteropTypes>true</EmbedInteropTypes>
-	</Reference>
-  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="Autodesk.Inventor.Interop">
+			<HintPath>$(InventorInteropPath)</HintPath>
+			<EmbedInteropTypes>false</EmbedInteropTypes>
+		</Reference>
+	</ItemGroup>
 
-  <Target Name="EnsureInventorInteropReference" BeforeTargets="ResolveReferences" Condition="!Exists('$(InventorInteropPath)')">
-	<Error Text="Autodesk.Inventor.Interop.dll was not found. Set the InventorInteropPath MSBuild property to your installed Inventor Public Assemblies path." />
-  </Target>
+	<Target Name="EnsureInventorInteropReference" BeforeTargets="ResolveReferences" Condition="!Exists('$(InventorInteropPath)')">
+		<Error Text="Autodesk.Inventor.Interop.dll was not found. Set the InventorInteropPath MSBuild property to your installed Inventor Public Assemblies path." />
+	</Target>
 
-  <ItemGroup>
-	<None Include="..\..\images\InventorCode-brackets-logo-64x64.png">
-	  <Pack>True</Pack>
-	  <PackagePath></PackagePath>
-	</None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\images\InventorCode-brackets-logo-64x64.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-	<Reference Include="Microsoft.CSharp" />
-	<Reference Include="System.Windows.Forms" />
-  </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Windows.Forms" />
+	</ItemGroup>
 
 </Project>

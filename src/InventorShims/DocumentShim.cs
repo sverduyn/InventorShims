@@ -209,7 +209,7 @@ namespace InventorShims
         /// </summary>
         /// <param name="selectSet">Inventor.SelectSet</param>
         /// <returns>List(of Documents)</returns>
-        public static List<Document> GetDocumentsFromSelectSet(this SelectSet selectSet)
+        public static List<Document> GetDocumentsFromSelectSet(this SelectSet selectSet, Inventor.Application app = null)
         {
             Trace.Listeners.Add(new TextWriterTraceListener(Console.Out));
             Trace.AutoFlush = true;
@@ -228,7 +228,7 @@ namespace InventorShims
 
             foreach (dynamic i in selectSet)
             {
-                tempDocument = GetDocumentFromObject(i);
+                tempDocument = GetDocumentFromObject(i, app);
 
                 Trace.WriteLine("item  " + (string)i.type.ToString());
 
@@ -253,14 +253,15 @@ namespace InventorShims
         /// </summary>
         /// <param name="obj">Object</param>
         /// <returns>Inventor.Document</returns>
-        public static Document GetDocumentFromObject(this Object obj)
+        public static Document GetDocumentFromObject(this Object obj, Inventor.Application app = null)
         {
             if (ObjectIsDocument(obj))
                 return (Document)obj;
-
-            Inventor.Application app = ApplicationShim.CurrentInstance();
+            // Use the supplied Application if provided (e.g. from an add-in's
+            // addInSiteObject.Application); otherwise fall back to the ROT attach.
+            if (app == null)
+                app = ApplicationShim.CurrentInstance();
             if (app == null) return null;
-
             Document currentDocument = app.ActiveEditDocument;
             switch (currentDocument.DocumentType)
             {
@@ -512,14 +513,14 @@ namespace InventorShims
         /// <param name="selectSet">Inventor.SelectionSet</param>
         /// <returns>IEnumerable Document</returns>
         /// <exception cref="System.ArgumentNullException">Throws an error if the selection set is empty.</exception>
-        public static IEnumerable<Document> EnumerateDocuments(this SelectSet selectSet)
+        public static IEnumerable<Document> EnumerateDocuments(this SelectSet selectSet, Application app = null)
         {
             if (selectSet.Count == 0)
                 throw new System.ArgumentNullException("The selection set was empty.");
 
             foreach (dynamic i in selectSet)
             {
-                Document tempDocument = DocumentShim.GetDocumentFromObject(i);
+                Document tempDocument = DocumentShim.GetDocumentFromObject(i, app);
 
                 if (tempDocument is null)
                     continue;
